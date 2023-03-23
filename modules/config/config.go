@@ -105,9 +105,6 @@ func (d Database) ParamStr() string {
 		p = p[:len(p)-1]
 	}
 	if d.Driver == DriverPostgresql {
-		if _, ok := d.Params["sslmode"]; !ok {
-			d.Params["sslmode"] = "disable"
-		}
 		p = " "
 		for k, v := range d.Params {
 			p += k + "=" + v + " "
