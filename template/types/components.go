@@ -141,6 +141,7 @@ type DataTableAttribute interface {
 	SetSortUrl(value string) DataTableAttribute
 	SetExportUrl(value string) DataTableAttribute
 	SetUpdateUrl(value string) DataTableAttribute
+	SetMinWidth(value string) DataTableAttribute
 	GetContent() template.HTML
 }
 
