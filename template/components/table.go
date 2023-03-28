@@ -219,6 +219,11 @@ func (compo *DataTableAttribute) SetNoAction() types.DataTableAttribute {
 	return compo
 }
 
+func (compo *DataTableAttribute) SetMinWidth(value string) types.DataTableAttribute {
+	compo.MinWidth = value
+	return compo
+}
+
 func (compo *DataTableAttribute) GetContent() template.HTML {
 	if compo.MinWidth == "" {
 		compo.MinWidth = "1000px"
