@@ -35,15 +35,16 @@ import (
 // mssql, the other configurations will be ignored, except for
 // MaxIdleConns and MaxOpenConns.
 type Database struct {
-	Host       string `json:"host,omitempty" yaml:"host,omitempty" ini:"host,omitempty"`
-	Port       string `json:"port,omitempty" yaml:"port,omitempty" ini:"port,omitempty"`
-	User       string `json:"user,omitempty" yaml:"user,omitempty" ini:"user,omitempty"`
-	Pwd        string `json:"pwd,omitempty" yaml:"pwd,omitempty" ini:"pwd,omitempty"`
-	Name       string `json:"name,omitempty" yaml:"name,omitempty" ini:"name,omitempty"`
-	Driver     string `json:"driver,omitempty" yaml:"driver,omitempty" ini:"driver,omitempty"`
-	DriverMode string `json:"driver_mode,omitempty" yaml:"driver_mode,omitempty" ini:"driver_mode,omitempty"`
-	File       string `json:"file,omitempty" yaml:"file,omitempty" ini:"file,omitempty"`
-	Dsn        string `json:"dsn,omitempty" yaml:"dsn,omitempty" ini:"dsn,omitempty"`
+	Host                   string        `json:"host,omitempty" yaml:"host,omitempty" ini:"host,omitempty"`
+	Port                   string        `json:"port,omitempty" yaml:"port,omitempty" ini:"port,omitempty"`
+	User                   string        `json:"user,omitempty" yaml:"user,omitempty" ini:"user,omitempty"`
+	Pwd                    string        `json:"pwd,omitempty" yaml:"pwd,omitempty" ini:"pwd,omitempty"`
+	Name                   string        `json:"name,omitempty" yaml:"name,omitempty" ini:"name,omitempty"`
+	Driver                 string        `json:"driver,omitempty" yaml:"driver,omitempty" ini:"driver,omitempty"`
+	DriverMode             string        `json:"driver_mode,omitempty" yaml:"driver_mode,omitempty" ini:"driver_mode,omitempty"`
+	File                   string        `json:"file,omitempty" yaml:"file,omitempty" ini:"file,omitempty"`
+	Dsn                    string        `json:"dsn,omitempty" yaml:"dsn,omitempty" ini:"dsn,omitempty"`
+	AuthenticationStrategy func() string `json:"authentication_strategy,omitempty" yaml:"authentication_strategy,omitempty" ini:"authentication_strategy,omitempty"`
 
 	MaxIdleConns    int           `json:"max_idle_con,omitempty" yaml:"max_idle_con,omitempty" ini:"max_idle_con,omitempty"`
 	MaxOpenConns    int           `json:"max_open_con,omitempty" yaml:"max_open_con,omitempty" ini:"max_open_con,omitempty"`
@@ -54,6 +55,10 @@ type Database struct {
 }
 
 func (d Database) GetDSN() string {
+	if d.AuthenticationStrategy != nil {
+		return d.AuthenticationStrategy()
+	}
+
 	if d.Dsn != "" {
 		return d.Dsn
 	}
