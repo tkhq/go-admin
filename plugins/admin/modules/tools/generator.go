@@ -120,7 +120,7 @@ func NewParam(cfg Config) *Param {
 	ta := camelcase(cfg.Table)
 	dbTable := cfg.Table
 	if cfg.Schema != "" {
-		dbTable = cfg.Schema + "." + cfg.Table
+		dbTable = cfg.Schema + "\".\"" + cfg.Table
 	}
 
 	fields := getFieldsFromConn(cfg.Conn, dbTable, cfg.Driver)
