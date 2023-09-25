@@ -5,6 +5,7 @@
 package auth
 
 import (
+	"fmt"
 	"sync"
 
 	"github.com/GoAdminGroup/go-admin/modules/db/dialect"
@@ -136,6 +137,10 @@ func (s *TokenService) AddToken() string {
 // CheckToken check the given token with tokens in the CSRFToken, if exist
 // return true.
 func (s *TokenService) CheckToken(toCheckToken string) bool {
+	fmt.Println("TOCHECK")
+	fmt.Println(toCheckToken)
+	fmt.Println("ALLTOKENS")
+	fmt.Println(s.tokens)
 	for i := 0; i < len(s.tokens); i++ {
 		if (s.tokens)[i] == toCheckToken {
 			s.tokens = append((s.tokens)[:i], (s.tokens)[i+1:]...)

@@ -17,7 +17,6 @@ import (
 	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
 	"github.com/GoAdminGroup/go-admin/template"
 	"github.com/GoAdminGroup/go-admin/template/types"
-	"github.com/davecgh/go-spew/spew"
 )
 
 // GlobalDeferHandler is a global error handler of admin plugin.
@@ -26,7 +25,6 @@ func (h *Handler) GlobalDeferHandler(ctx *context.Context) {
 	logger.Access(ctx)
 
 	fmt.Println("GLOBALDEFERHANDLER")
-	spew.Dump(ctx)
 
 	if !h.config.OperationLogOff {
 		h.RecordOperationLog(ctx)

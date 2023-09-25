@@ -98,7 +98,6 @@ func (h *Handler) showNewForm(ctx *context.Context, alert template2.HTML, prefix
 // NewForm insert a table row into database.
 func (h *Handler) NewForm(ctx *context.Context) {
 	fmt.Println("SHOWINGNEWFORM")
-	spew.Dump(ctx)
 
 	param := guard.GetNewFormParam(ctx)
 

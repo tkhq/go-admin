@@ -126,6 +126,5 @@ func (g *Guard) NewForm(ctx *context.Context) {
 func GetNewFormParam(ctx *context.Context) *NewFormParam {
 	fmt.Println("NEWFORMPARAM")
 	spew.Dump(ctx.UserValue[newFormParamKey])
-	spew.Dump(ctx)
 	return ctx.UserValue[newFormParamKey].(*NewFormParam)
 }
