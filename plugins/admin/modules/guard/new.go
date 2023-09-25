@@ -1,6 +1,7 @@
 package guard
 
 import (
+	"fmt"
 	"html/template"
 	"mime/multipart"
 	"strings"
@@ -14,6 +15,7 @@ import (
 	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/form"
 	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/parameter"
 	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
+	"github.com/davecgh/go-spew/spew"
 )
 
 type ShowNewFormParam struct {
@@ -122,5 +124,8 @@ func (g *Guard) NewForm(ctx *context.Context) {
 }
 
 func GetNewFormParam(ctx *context.Context) *NewFormParam {
+	fmt.Println("NEWFORMPARAM")
+	spew.Dump(ctx.UserValue[newFormParamKey])
+	spew.Dump(ctx)
 	return ctx.UserValue[newFormParamKey].(*NewFormParam)
 }

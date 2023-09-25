@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	template2 "html/template"
 	"regexp"
 	"strings"
@@ -16,6 +17,7 @@ import (
 	"github.com/GoAdminGroup/go-admin/plugins/admin/modules/table"
 	"github.com/GoAdminGroup/go-admin/template"
 	"github.com/GoAdminGroup/go-admin/template/types"
+	"github.com/davecgh/go-spew/spew"
 )
 
 // GlobalDeferHandler is a global error handler of admin plugin.
@@ -23,12 +25,17 @@ func (h *Handler) GlobalDeferHandler(ctx *context.Context) {
 
 	logger.Access(ctx)
 
+	fmt.Println("GLOBALDEFERHANDLER")
+	spew.Dump(ctx)
+
 	if !h.config.OperationLogOff {
 		h.RecordOperationLog(ctx)
 	}
 
 	if err := recover(); err != nil {
 		logger.Error(err)
+		fmt.Println("RECOVERED FROM ERROR")
+		fmt.Println(err)
 
 		var (
 			errMsg string

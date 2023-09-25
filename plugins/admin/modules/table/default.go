@@ -823,7 +823,7 @@ func (tb *DefaultTable) UpdateData(dataList form.Values) error {
 
 // InsertData insert data.
 func (tb *DefaultTable) InsertData(dataList form.Values) error {
-
+	fmt.Println("ISINSERTINGDATA")
 	dataList.Add(form.PostTypeKey, "1")
 
 	var (

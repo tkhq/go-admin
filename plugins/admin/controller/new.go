@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/GoAdminGroup/go-admin/template"
+	"github.com/davecgh/go-spew/spew"
 
 	"github.com/GoAdminGroup/go-admin/modules/logger"
 
@@ -96,8 +97,13 @@ func (h *Handler) showNewForm(ctx *context.Context, alert template2.HTML, prefix
 
 // NewForm insert a table row into database.
 func (h *Handler) NewForm(ctx *context.Context) {
+	fmt.Println("SHOWINGNEWFORM")
+	spew.Dump(ctx)
 
 	param := guard.GetNewFormParam(ctx)
+
+	fmt.Println("PARAM")
+	spew.Dump(param)
 
 	// process uploading files, only support local storage
 	if len(param.MultiForm.File) > 0 {
@@ -113,8 +119,10 @@ func (h *Handler) NewForm(ctx *context.Context) {
 		}
 	}
 
+	fmt.Println("INSERTING")
 	err := param.Panel.InsertData(param.Value())
 	if err != nil {
+		fmt.Println(err)
 		logger.Error("insert data error: ", err)
 		if ctx.WantJSON() {
 			response.Error(ctx, err.Error(), map[string]interface{}{

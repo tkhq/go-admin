@@ -122,14 +122,9 @@ func NewParam(cfg Config) *Param {
 	if cfg.Schema != "" {
 		dbTable = cfg.Schema + "\".\"" + cfg.Table
 	}
-	fmt.Println("GETTING COLUMNS")
-	fmt.Println(dbTable)
-	fmt.Println("getting columns!")
-
 	fields := getFieldsFromConn(cfg.Conn, dbTable, cfg.Driver)
 	tt := strings.Title(ta)
 
-	fmt.Println(fields)
 	pkey, ptype := fields.GetPrimaryKey()
 
 	return &Param{
@@ -443,11 +438,7 @@ func getType(typeName string) string {
 }
 
 func getFieldsFromConn(conn db.Connection, table, driver string) Fields {
-	fmt.Println("attempting to get columns from connection")
 	columnsModel, _ := db.WithDriver(conn).Table(table).ShowColumns()
-	fmt.Println("columns!")
-	fmt.Println(columnsModel)
-
 	fields := make(Fields, len(columnsModel))
 
 	fieldField := "Field"
